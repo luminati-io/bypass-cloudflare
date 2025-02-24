@@ -16,7 +16,7 @@ This guide explains how to bypass Cloudflare’s security and successfully scrap
 
 Cloudflare’s [web application firewall](https://www.cloudflare.com/application-services/products/waf/) (WAF) protects web apps from DDoS and zero-day attacks. Running on its global network, it stops attacks in real time and uses a proprietary algorithm to identify and block malicious bots based on several traits:
 
-- **TLS fingerprints**: JA3 fingerprints identify the clients and their capabilities and configurations and verify if a client is genuine.
+- [**TLS fingerprints**](https://brightdata.com/blog/web-data/tls-fingerprinting): JA3 fingerprints identify the clients and their capabilities and configurations and verify if a client is genuine.
 - **[HTTP/2 fingerprints](https://www.blackhat.com/docs/eu-17/materials/eu-17-Shuster-Passive-Fingerprinting-Of-HTTP2-Clients-wp.pdf)**: Uses HTTP/2 parameters to match against known bot signatures.
 - **HTTP details**: Inspects headers and cookies for bot-like configurations.
 - **JavaScript fingerprints**: Gathers browser, OS, and hardware details to distinguish bots.
@@ -30,15 +30,15 @@ Cloudflare’s proprietary bot detection isn’t foolproof, so you'll need to ex
 
 ### Using Proxy Solutions
 
-Cloudflare detects bots by flagging too many requests from a single IP. To avoid this, use rotating premium residential proxies. However, if user-agent checks are in play, you'll need to spoof the user agent.
+Cloudflare detects bots by flagging too many requests from a single IP. To avoid this, use [premium residential proxies](https://brightdata.com/proxy-types/residential-proxies). However, if user-agent checks are in play, you'll need to spoof the user agent.
 
 ### Spoofing HTTP Headers
 
-HTTP headers reveal client details. Cloudflare checks these to differentiate real browsers, which send many headers, from scrapers that send few. Most scraper tools let you modify headers to mimic a genuine browser. Common headers include:
+[HTTP headers](https://brightdata.com/blog/web-data/http-headers-for-web-scraping) reveal client details. Cloudflare checks these to differentiate real browsers, which send many headers, from scrapers that send few. Most scraper tools let you modify headers to mimic a genuine browser. Common headers include:
 
 #### User-Agent Header
 
-The `User-Agent` header reveals the browser and OS. Cloudflare may block bot-like User-Agents, so spoofing it to mimic a real browser (e.g., Chrome, Firefox, Safari) can help avoid detection. For example, in Python’s `requests` library, you can set it like this:
+The `User-Agent` header reveals the browser and OS. Cloudflare may block bot-like User-Agents, so spoofing it to mimic a real browser (e.g., Chrome, Firefox, Safari) can help avoid detection. For example, in Python’s [`requests` library](https://pypi.org/project/requests/), you can set it like this:
 
 ```python
 import requests
